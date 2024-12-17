@@ -26,7 +26,7 @@ jobs:
       runs-on: ubuntu-latest
       environment:
         name: prod
-        url: "https://github.com/${{github.respository}}"
+        url: "https://github.com/${{github.repository}}"
       needs: [fake_test, deploy_test]
       steps:
         - name: show info
