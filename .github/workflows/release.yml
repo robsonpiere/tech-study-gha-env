@@ -1,0 +1,35 @@
+name: Release
+on:
+  release:
+env:
+    TAG: ${{ github.event.release.tag_name }}
+jobs:
+
+    fake_test:
+      name: teste
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - run: echo 'tests passed'
+
+
+    deploy_test:
+      runs-on: ubuntu-latest
+      environment: test
+      needs: release
+      steps:
+        - name: show info
+          run: echo "Deploy in test"
+
+    deploy_prod:
+      runs-on: ubuntu-latest
+      environment:
+      name: prod
+      url: "https://github.com/${{github.respository}}"
+      needs: [release, deploy_test]
+      steps:
+        - name: show info
+          run: |
+            echo "Deploy in prod"
+            echo "Version: echo ${{ env.TAG }}"
