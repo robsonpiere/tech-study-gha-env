@@ -17,7 +17,6 @@ jobs:
     deploy_test:
       runs-on: ubuntu-latest
       environment: test
-      url: "https://github.com/${{github.respository}}"
       needs: fake_test
       steps:
         - name: show info
@@ -26,8 +25,8 @@ jobs:
     deploy_prod:
       runs-on: ubuntu-latest
       environment:
-      name: prod
-      url: "https://github.com/${{github.respository}}"
+        name: prod
+        url: "https://github.com/${{github.respository}}"
       needs: [fake_test, deploy_test]
       steps:
         - name: show info
