@@ -18,7 +18,7 @@ jobs:
       runs-on: ubuntu-latest
       environment: test
       url: "https://github.com/${{github.respository}}"
-      needs: release
+      needs: fake_test
       steps:
         - name: show info
           run: echo "Deploy in test"
@@ -28,7 +28,7 @@ jobs:
       environment:
       name: prod
       url: "https://github.com/${{github.respository}}"
-      needs: [release, deploy_test]
+      needs: [fake_test, deploy_test]
       steps:
         - name: show info
           run: |
